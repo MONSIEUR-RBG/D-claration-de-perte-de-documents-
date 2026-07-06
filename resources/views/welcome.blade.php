@@ -1,0 +1,1897 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service publique de l'administration togolaise · République Togolaise</title>
+    <meta name="description" content="Plateforme officielle de déclaration de perte de documents de la République Togolaise.">
+    <link rel="icon" type="image/png" href="{{ asset('images/lion.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --flag-green: #50A842;
+            --flag-green-dark: #3b7e33;
+            --flag-green-light: #77b96d;
+            --flag-yellow: #FFCB00;
+            --flag-red: #D21034;
+            --flag-white: #FFFFFF;
+            --primary: var(--flag-green);
+            --primary-dark: var(--flag-green-dark);
+            --secondary: var(--flag-yellow);
+            --warning: var(--flag-yellow);
+            --danger: var(--flag-red);
+            --dark: #111827;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-600: #64748b;
+            --gray-800: #1e293b;
+            --whatsapp: #25D366;
+        }
+
+        body { 
+            min-height: 100vh; 
+            position: relative;
+            background: #f5f7fa;
+        }
+
+        .page-gradient-zone {
+            background: linear-gradient(90deg, #006F89 0%, #316B53 100%);
+            padding-top: 5.5rem;
+        }
+
+        .page-bottom-section {
+            background-color: #EBEFF4;
+        }
+
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(90deg, #006F89 0%, #316B53 100%);
+            padding: 1rem 5%;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-right: 0.5rem;
+            order: 2;
+        }
+
+        .header-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Menu Hamburger */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 0;
+            order: 1;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: #000000;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.75rem; 
+            text-decoration: none;
+            margin-right: 0.5rem;
+        }
+        
+        .logo h1 { 
+            color: #006A36; 
+            font-size: 1rem; 
+            font-weight: 700;
+            line-height: 1.3;
+            max-width: 200px;
+        }
+
+        .logo-republic {
+            display: flex;
+            flex-direction: column;
+            margin-left: 0;
+        }
+        .logo-republic .republic-name {
+            font-size: 0.9rem;
+            color: #006A36;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .logo-republic .republic-devise {
+            display: none;
+        }
+
+        nav { 
+            display: flex; 
+            align-items: center; 
+            gap: 2rem; 
+            flex-wrap: wrap;
+            position: relative;
+            order: 3;
+            margin-left: auto;
+        }
+
+        .nav-menu {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 70px;
+            width: 100%;
+            background: white;
+            flex-direction: column;
+            gap: 0;
+            padding: 0;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 99;
+        }
+
+        nav.active .nav-menu {
+            display: flex;
+        }
+
+        .menu-header {
+            padding: 1.5rem 5%;
+            border-bottom: 2px solid #006A36;
+        }
+
+        .menu-header h2 {
+            color: #006A36;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .nav-menu a { 
+            color: #006A36; 
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: block;
+            padding: 1rem 5%;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .nav-menu a:hover { 
+            color: #7FFF00; 
+            background: #f8fafc;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: auto;
+        }
+
+        .btn-connect, .btn-register {
+            background: linear-gradient(135deg, #50A842, #77b96d);
+            color: white;
+            padding: 0.6rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(80, 168, 66, 0.3);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .btn-connect:hover, .btn-register:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 20px rgba(80, 168, 66, 0.4);
+        }
+
+        /* Mobile et Tablet */
+        @media (max-width: 1024px) {
+            .docs-strip-inner {
+                width: 100%;
+                height: auto;
+                max-width: 800px;
+            }
+
+            .docs-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .docs-label {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+                border-top: 1px solid #e2e8f0;
+                padding: 1rem 5%;
+                margin-left: 0;
+            }
+
+            .btn-connect, .btn-register {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .docs-strip-inner {
+                padding: 2rem;
+            }
+
+            .docs-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .doc-pill {
+                padding: 1rem;
+            }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            max-width: 1400px;
+            margin: 4rem auto 3rem;
+            padding: 0 5%;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .hero-content {
+            padding: 3rem;
+        }
+
+        .badge-officiel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge-officiel .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(80, 168, 66, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(80, 168, 66, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.9rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-found {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-found:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-hint {
+            font-size: 0.7rem;
+            color: #f59e0b;
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            white-space: nowrap;
+        }
+
+        .title-with-lion {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lion-icon {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .title-with-lion h1 {
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .btn-hint {
+                white-space: normal;
+                text-align: center;
+            }
+
+            .title-with-lion {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .lion-icon {
+                height: 60px;
+            }
+        }
+
+        /* ===== ILLUSTRATION PERSONNALISÉE ===== */
+        .hero-image {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .custom-illustration {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            background: #1a2a3a;
+            overflow: hidden;
+        }
+
+        /* Bureau */
+        .desk {
+            position: relative;
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        /* Écran d'ordinateur */
+        .computer {
+            background: #0f172a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+        }
+
+        .computer-header {
+            background: #1e293b;
+            padding: 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .computer-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .computer-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #475569;
+        }
+
+        .computer-dots span:first-child { background: #ef4444; }
+        .computer-dots span:nth-child(2) { background: #f59e0b; }
+        .computer-dots span:last-child { background: #10b981; }
+
+        .computer-title {
+            font-size: 0.7rem;
+            color: #94a3b8;
+            margin-left: auto;
+        }
+
+        .computer-screen {
+            padding: 1.2rem;
+            background: #f8fafc;
+        }
+
+        /* Formulaire dans l'écran */
+        .form-preview {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .form-preview h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #10b981;
+            display: inline-block;
+        }
+
+        .preview-field {
+            margin-bottom: 0.6rem;
+        }
+
+        .preview-field label {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #64748b;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .preview-field input, .preview-field select {
+            width: 100%;
+            padding: 0.4rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            background: #f8fafc;
+        }
+
+        .preview-field input {
+            background: white;
+        }
+
+        .preview-submit {
+            background: #10b981;
+            color: white;
+            padding: 0.4rem;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 0.6rem;
+        }
+
+        /* Personnage (homme noir) */
+        .person {
+            position: absolute;
+            bottom: 20px;
+            right: -20px;
+            width: 140px;
+            height: auto;
+            z-index: 2;
+        }
+
+        .person-body {
+            background: #1a1a2e;
+            width: 70px;
+            height: 80px;
+            border-radius: 20px 20px 10px 10px;
+            position: relative;
+            margin-left: auto;
+            margin-right: 10px;
+        }
+
+        .person-head {
+            width: 55px;
+            height: 55px;
+            background: #5c3d2e;
+            border-radius: 50%;
+            position: absolute;
+            top: -45px;
+            left: 18px;
+        }
+
+        .person-hair {
+            width: 58px;
+            height: 30px;
+            background: #2c1810;
+            border-radius: 30px 30px 15px 15px;
+            position: absolute;
+            top: -10px;
+            left: -1.5px;
+        }
+
+        .person-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .person-eyes {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding-top: 18px;
+        }
+
+        .eye {
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .person-mouth {
+            width: 12px;
+            height: 4px;
+            background: #c97a5e;
+            border-radius: 0 0 5px 5px;
+            margin: 8px auto 0;
+        }
+
+        .person-arm-left {
+            width: 35px;
+            height: 12px;
+            background: #1a1a2e;
+            position: absolute;
+            top: 25px;
+            left: -20px;
+            border-radius: 10px;
+            transform: rotate(-30deg);
+        }
+
+        .person-arm-right {
+            width: 50px;
+            height: 12px;
+            background: #1a1a2e;
+            position: absolute;
+            top: 25px;
+            right: -35px;
+            border-radius: 10px;
+            transform: rotate(20deg);
+        }
+
+        /* Clavier */
+        .keyboard {
+            background: #334155;
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            display: flex;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .key {
+            width: 20px;
+            height: 20px;
+            background: #475569;
+            border-radius: 4px;
+        }
+
+        .key.space {
+            width: 80px;
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+            z-index: 3;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid var(--gray-200);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-top: 0.3rem;
+        }
+
+        /* Documents Strip */
+        .docs-strip {
+            background: transparent;
+            padding: 3rem 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .docs-strip-inner {
+            width: 1201px;
+            height: 600px;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-radius: 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #006A36;
+        }
+
+        .docs-label {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #006A36;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .doc-pill {
+            background: white;
+            border: 2px solid #006A36;
+            border-radius: 16px;
+            padding: 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #006A36;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 106, 54, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .doc-pill:hover {
+            background: #006A36;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 106, 54, 0.3);
+        }
+
+        .doc-icon {
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #006A36;
+            transition: all 0.3s;
+        }
+
+        .doc-pill:hover .doc-icon {
+            color: white;
+        }
+
+        /* Why Choose Us Section */
+        .why-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .why-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid var(--gray-200);
+        }
+
+        .why-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .why-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .why-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 2rem auto 0;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--gray-100);
+        }
+
+        .faq-question span:first-child {
+            font-size: 1rem;
+        }
+
+        .faq-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--primary);
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            color: var(--gray-600);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.2rem;
+            max-height: 200px;
+        }
+
+        /* Partners Section */
+        .partners-section {
+            background: white;
+            padding: 3rem 5%;
+            margin: 2rem 0;
+        }
+
+        .partners-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .partners-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .partner-item {
+            text-align: center;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .partner-item:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        .partner-icon {
+            font-size: 3rem;
+        }
+
+        .partner-name {
+            font-size: 0.75rem;
+            color: var(--gray-600);
+            margin-top: 0.3rem;
+        }
+
+        /* Services Section */
+        .services-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--gray-600);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid var(--gray-200);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: gap 0.2s;
+        }
+
+        .service-link:hover {
+            gap: 0.6rem;
+        }
+
+        /* How it Works */
+        .how-section {
+            background: white;
+            padding: 4rem 5%;
+            margin: 4rem 0;
+        }
+
+        .how-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 0 auto 1rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, var(--dark), #1e293b);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-box h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-box p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* WhatsApp Float Button - VRAI LOGO OFFICIEL */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+            animation: pulse-wa 2s infinite;
+        }
+
+        .whatsapp-float svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        @keyframes pulse-wa {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Footer */
+        footer {
+            background: #ffffff;
+            color: #1f2937;
+            margin-top: 4rem;
+            box-shadow: 0 -6px 24px rgba(15, 23, 42, 0.04);
+        }
+
+        .footer-top {
+            padding: 4rem 0 2.5rem;
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 2.5rem;
+            padding-left: 6rem;
+            padding-right: 6rem;
+        }
+
+        .footer-brand,
+        .footer-section,
+        .footer-actions {
+            flex: 1 1 180px;
+            min-width: 180px;
+        }
+
+        .footer-brand {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-logo {
+            max-width: 120px;
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-title {
+            margin-bottom: 0.8rem;
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            color: #111827;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .footer-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-nav li + li {
+            margin-top: 0.45rem;
+        }
+
+        .footer-nav a {
+            color: #4b5563;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #d1d5db;
+            border-radius: 50%;
+            color: #4b5563;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .footer-actions .btn-primary,
+        .footer-actions .btn-secondary {
+            width: 175px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 0.8rem 1rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .footer-actions .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+        }
+
+        .footer-actions .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+            border: none;
+        }
+
+        .footer-bottom {
+            padding: 1.25rem 0;
+            border-top: 1px solid #e5e7eb;
+            background: #f8fafc;
+            text-align: center;
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .footer-bottom .current-year {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        @media (max-width: 991px) {
+            .footer-top {
+                padding: 3rem 0 2rem;
+            }
+
+            .footer-main {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-brand,
+            .footer-section,
+            .footer-actions {
+                width: 100%;
+                max-width: 320px;
+                min-width: 0;
+            }
+
+            .footer-actions {
+                align-items: stretch;
+            }
+
+            .footer-actions .btn-primary,
+            .footer-actions .btn-secondary {
+                width: 100%;
+            }
+        }
+
+        /* Button Group */
+        .btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                justify-content: center;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-content {
+                padding: 2rem;
+            }
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn-wrapper {
+                align-items: center;
+            }
+            .btn-hint {
+                white-space: normal;
+                text-align: center;
+            }
+            .cta-box {
+                padding: 2rem;
+            }
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            .partners-grid {
+                gap: 1.5rem;
+            }
+            .partner-item {
+                flex: 0 0 calc(33.33% - 1rem);
+            }
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            .whatsapp-float svg {
+                width: 28px;
+                height: 28px;
+            }
+            .person {
+                display: none;
+            }
+            .custom-illustration {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-gradient-zone">
+@include('layouts.partials.public-header')
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+    <div class="hero-container">
+        <div class="hero-content">
+            <div class="badge-officiel">
+                <span class="dot"></span>
+                Service officiel de la République Togolaise
+            </div>
+            <div class="title-with-lion">
+                <h1>Plateforme Nationale de<br>Déclaration de <span>Documents Perdus</span></h1>
+                <img src="{{ asset('images/lion.png') }}" alt="Lion" class="lion-icon">
+            </div>
+            <p>Déclarez la perte de vos documents administratifs en quelques minutes, suivez votre dossier en temps réel et téléchargez votre attestation numérique certifiée — sans vous déplacer.</p>
+            <div class="hero-buttons">
+                <div class="btn-wrapper">
+                    <a href="{{ route('register') }}" class="btn-primary">
+                        <i class="bi bi-pencil-square me-2"></i>Faire une déclaration
+                    </a>
+                </div>
+                <div class="btn-wrapper">
+                    <a href="{{ route('documents-trouves.create') }}" class="btn-found">
+                        <i class="bi bi-box-seam me-2"></i>Signaler
+                    </a>
+                    <div class="btn-hint">
+                        <i class="bi bi-geo-alt-fill me-1"></i>Vous avez trouvé un document ?
+                    </div>
+                </div>
+                <div class="btn-wrapper">
+                    <a href="#comment" class="btn-outline">
+                        Comment ça marche →
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <!-- Illustration personnalisée : Homme noir devant PC avec formulaire -->
+            <div class="custom-illustration">
+                <div class="desk">
+                    <!-- Écran d'ordinateur -->
+                    <div class="computer">
+                        <div class="computer-header">
+                            <div class="computer-dots">
+                                <span></span><span></span><span></span>
+                            </div>
+                            <span class="computer-title">Déclare.tg</span>
+                        </div>
+                        <div class="computer-screen">
+                            <div class="form-preview">
+                                <h4> Nouvelle Déclaration de Perte</h4>
+                                <div class="preview-field">
+                                    <label>Type de pièce</label>
+                                    <select>
+                                        <option>Carte nationale d'identité</option>
+                                        <option>Passeport</option>
+                                        <option>Permis de conduire</option>
+                                    </select>
+                                </div>
+                                <div class="preview-field">
+                                    <label>Nom complet</label>
+                                    <input type="text" placeholder="Eyram Abel" value="MONSIEUR RBG">
+                                </div>
+                                <div class="preview-field">
+                                    <label>Numéro de pièce</label>
+                                    <input type="text" placeholder="CNI-123456">
+                                </div>
+                                <div class="preview-field">
+                                    <label>Date de perte</label>
+                                    <input type="date">
+                                </div>
+                                <div class="preview-field">
+                                    <label>Lieu de perte</label>
+                                    <input type="text" placeholder="Lomé, Togo">
+                                </div>
+                                <div class="preview-submit">
+                                     Envoyer la déclaration
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Clavier -->
+                    <div class="keyboard">
+                        <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
+                        <div class="key"></div><div class="key"></div><div class="key"></div><div class="key"></div>
+                        <div class="key space"></div>
+                        <div class="key"></div><div class="key"></div><div class="key"></div>
+                    </div>
+                    
+                    <!-- Personnage (homme noir) assis devant le PC -->
+                    <!-- <div class="person">
+                        <div class="person-head">
+                            <div class="person-hair"></div>
+                            <div class="person-face">
+                                <div class="person-eyes">
+                                    <div class="eye"></div>
+                                    <div class="eye"></div>
+                                </div>
+                                <div class="person-mouth"></div>
+                            </div>
+                        </div>
+                        <div class="person-body"></div>
+                        <div class="person-arm-left"></div>
+                        <div class="person-arm-right"></div>
+                    </div> -->
+                </div>
+                <div class="floating-badge">
+                     +12 000 citoyens satisfaits
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section" aria-label="Statistiques du service">
+    <div class="stats-grid">
+        <!-- <div class="stat-card">
+            <div class="stat-number"></div>
+            <div class="stat-label"></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">De satisfaction</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Support disponible</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">48h</div>
+            <div class="stat-label">Temps moyen de traitement</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Gratuit</div>
+        </div> -->
+    </div>
+</section>
+
+</div>
+
+<!-- DOCUMENTS STRIP -->
+<div class="page-bottom-section">
+<div class="docs-strip">
+    <div class="docs-strip-inner">
+        <span class="docs-label">Documents acceptés</span>
+        <div class="docs-grid">
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-credit-card-2-front"></i></span>
+                Carte Nationale d'Identité
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-bookmark-check"></i></span>
+                Passeport
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-car-front"></i></span>
+                Permis de conduire
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-file-earmark-text"></i></span>
+                Acte de naissance
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-mortarboard"></i></span>
+                Diplôme & Attestation
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-book-half"></i></span>
+                Carnet de santé
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-house-fill"></i></span>
+                Titre de propriété
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-credit-card"></i></span>
+                Carte bancaire
+            </a>
+            <a href="{{ route('register') }}" class="doc-pill">
+                <span class="doc-icon"><i class="bi bi-binoculars"></i></span>
+                Permis de chasse
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- WHY CHOOSE US -->
+<section class="why-section">
+    <div class="section-header">
+        <h2>Pourquoi <span style="color: var(--primary);">nous choisir ?</span></h2>
+        <p>Une plateforme fiable, sécurisée et accessible à tous</p>
+    </div>
+    <div class="why-grid">
+        <div class="why-card">
+            <div class="why-icon"><i class="bi bi-shield-lock-fill"></i></div>
+            <h3>100% Sécurisé</h3>
+            <p>Vos données sont chiffrées et protégées conformément aux normes internationales.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon"><i class="bi bi-lightning-fill"></i></div>
+            <h3>Rapide & Efficace</h3>
+            <p>Déclaration en moins de 10 minutes. Traitement sous 48h maximum.</p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon"><i class="bi bi-cash-coin"></i></div>
+            <h3>Entièrement Gratuit</h3>
+            <p>Service public 100% gratuit. Aucun frais caché.</p>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+    <div class="section-header">
+        <h2>Nos services</h2>
+        <p>Tout ce dont vous avez besoin en un seul endroit</p>
+    </div>
+    <div class="services-grid">
+        <div class="service-card">
+            <div class="service-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <h3>Déclaration de Perte</h3>
+            <p>Déclarez la perte de votre CNI, passeport, permis de conduire ou tout autre document administratif directement en ligne.</p>
+            <a href="{{ route('register') }}" class="service-link">Commencer →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="bi bi-search"></i></div>
+            <h3>Suivi en Temps Réel</h3>
+            <p>Consultez à tout moment l'état d'avancement de votre dossier. Recevez des notifications à chaque étape.</p>
+            <a href="{{ route('login') }}" class="service-link">Suivre mon dossier →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="bi bi-file-earmark-pdf-fill"></i></div>
+            <h3>Attestation Numérique</h3>
+            <p>Téléchargez votre attestation certifiée au format PDF, reconnue officiellement par toutes les administrations.</p>
+            <a href="{{ route('login') }}" class="service-link">Voir mes attestations →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="bi bi-box-seam"></i></div>
+            <h3>J'ai Trouvé un Document</h3>
+            <p>Vous avez trouvé un document ? Déclarez-le pour aider son propriétaire grâce au rapprochement automatique.</p>
+            <a href="{{ route('documents-trouves.create') }}" class="service-link">Déclarer →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="bi bi-link-45deg"></i></div>
+            <h3>Rapprochement Automatique</h3>
+            <p>Notre système compare automatiquement les déclarations de perte avec les documents trouvés.</p>
+            <a href="{{ route('help.public') }}" class="service-link">En savoir plus →</a>
+        </div>
+        <div class="service-card">
+            <div class="service-icon"><i class="bi bi-people-fill"></i></div>
+            <h3>Assistance & Support</h3>
+            <p>Notre équipe est disponible pour vous accompagner dans vos démarches. Consultez la FAQ ou contactez-nous.</p>
+            <a href="{{ route('help.public') }}" class="service-link">Centre d'aide →</a>
+        </div>
+    </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="comment">
+    <div class="how-inner">
+        <div class="section-header">
+            <h2>Comment ça fonctionne ?</h2>
+            <p>Un processus simple en 4 étapes</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Créez votre compte</h3>
+                <p>Inscrivez-vous avec votre numéro de téléphone ou adresse e-mail. Gratuit et rapide.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Remplissez le formulaire</h3>
+                <p>Indiquez le type de document, vos informations et les circonstances de la perte.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Validation officielle</h3>
+                <p>Un agent examine votre déclaration. Vous êtes notifié par SMS et e-mail.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Téléchargez l'attestation</h3>
+                <p>Votre attestation PDF certifiée est disponible immédiatement après validation.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+    <div class="section-header">
+        <h2>Foire aux <span style="color: var(--primary);">questions</span></h2>
+        <p>Les réponses aux questions les plus fréquentes</p>
+    </div>
+    <div class="faq-grid">
+        <div class="faq-item">
+            <div class="faq-question">
+                <span><i class="bi bi-pin-angle-fill me-2"></i>Comment déclarer la perte de mon document ?</span>
+                <span class="faq-icon"><i class="bi bi-chevron-down"></i></span>
+            </div>
+            <div class="faq-answer">
+                Il vous suffit de créer un compte, de remplir le formulaire en ligne avec les informations demandées (type de document, circonstances de la perte) et de soumettre votre déclaration. Un agent la traitera sous 48h.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span><i class="bi bi-clock-fill me-2"></i>Combien de temps faut-il pour obtenir l'attestation ?</span>
+                <span class="faq-icon"><i class="bi bi-chevron-down"></i></span>
+            </div>
+            <div class="faq-answer">
+                Le délai moyen de traitement est de 24 à 48 heures. Vous recevrez une notification dès que votre déclaration sera validée. L'attestation sera alors disponible en téléchargement.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span><i class="bi bi-currency-bitcoin me-2"></i>Est-ce que le service est vraiment gratuit ?</span>
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                Oui, le service est 100% gratuit. C'est un service public mis à disposition des citoyens togolais. Aucun frais n'est requis pour la déclaration ou l'obtention de l'attestation.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PARTNERS SECTION -->
+<div class="partners-section">
+    <div class="partners-inner">
+        <div class="section-header">
+            <h2>Nos <span style="color: var(--primary);">partenaires</span></h2>
+            <p>Ils nous font confiance</p>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-item">
+                <div class="partner-icon">🏛️</div>
+                <div class="partner-name">Ministère de l'Intérieur</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-icon">🆔</div>
+                <div class="partner-name">ANPI Togo</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-icon">🏢</div>
+                <div class="partner-name">Mairie de Lomé</div>
+            </div>
+            <div class="partner-item">
+                <div class="partner-icon"><i class="bi bi-telephone-fill"></i></div>
+                <div class="partner-name">Togo Telecom</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="cta-box">
+        <h2>Prêt à effectuer votre déclaration ?</h2>
+        <p>Rejoignez les 12 000 citoyens togolais qui ont déjà simplifié leurs démarches</p>
+        <div class="cta-buttons">
+            <a href="{{ route('register') }}" class="btn-primary"><i class="bi bi-file-earmark-plus me-2"></i>Créer mon compte</a>
+            <a href="{{ route('documents-trouves.create') }}" class="btn-outline" style="background: transparent; border-color: white; color: white;"><i class="bi bi-file-earmark-fill me-2"></i>J'ai trouvé un document</a>
+        </div>
+    </div>
+</section>
+
+</div>
+
+@include('layouts.partials.footer')
+
+<!-- WHATSAPP FLOATING BUTTON - VRAI LOGO OFFICIEL -->
+<a href="https://wa.me/22890000000?text=Bonjour%2C%20je%20souhaite%20avoir%20plus%20d%27informations%20sur%20la%20plateforme%20e-D%C3%A9claration%20TG" 
+   class="whatsapp-float" 
+   target="_blank"
+   title="Discuter avec nous sur WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path fill="#25D366" d="M12 0C5.373 0 0 5.373 0 12c0 2.126.55 4.128 1.52 5.87L0 24l6.33-1.52A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+        <path fill="#FFF" d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10a9.96 9.96 0 0 1-5.33-1.56l-3.67.88.88-3.67A9.96 9.96 0 0 1 2 12c0-5.523 4.477-10 10-10z"/>
+        <path fill="#25D366" d="M12 4.5C7.86 4.5 4.5 7.86 4.5 12c0 1.35.34 2.62.94 3.74l-.59 2.41 2.41-.59c1.12.6 2.39.94 3.74.94 4.14 0 7.5-3.36 7.5-7.5S16.14 4.5 12 4.5z"/>
+        <path fill="#FFF" d="M16.5 14.8c-.2.4-.6.7-1.1.8-.4.1-.8.1-1.3-.2-.5-.3-1-.7-1.5-1.2-.4-.5-.8-1-1.1-1.5-.2-.3-.3-.6-.2-.9.1-.3.3-.5.6-.7.1-.1.2-.2.3-.3.1 0 .2 0 .2.1.1 0 .2.1.3.3.1.2.3.6.4.8.1.2.1.3 0 .4-.1.1-.2.2-.3.3-.1.1-.2.2-.2.3 0 .1 0 .2.1.3.2.3.5.6.8.9.3.3.6.5.9.6.2.1.4.1.5 0 .1-.1.2-.2.3-.3.1-.1.2-.1.3 0 .1.1.3.2.4.3.2.1.3.3.4.4.1.2.1.3 0 .5z"/>
+        <path fill="#25D366" d="M11.5 10.5c.2-.2.3-.4.4-.6 0-.1 0-.2-.1-.3-.1-.2-.3-.6-.4-.8-.1-.2-.3-.3-.4-.3h-.3c-.2 0-.4.1-.6.2-.2.2-.4.4-.6.7-.2.3-.3.6-.2.9.1.3.2.6.3.9.4.7.8 1.3 1.3 1.8.5.5 1.1.9 1.8 1.2.3.1.6.2.9.2.3 0 .6-.1.9-.3.2-.1.4-.3.5-.5.1-.2.2-.4.1-.6-.1-.2-.2-.4-.4-.5-.1-.1-.3-.2-.4-.3-.2-.1-.3-.1-.5 0-.1.1-.2.2-.3.3-.1.1-.2.2-.3.2-.1 0-.2-.1-.3-.2-.2-.2-.5-.5-.7-.8-.2-.3-.3-.6-.2-.9.1-.3.2-.5.4-.7z"/>
+    </svg>
+</a>
+
+<script>
+    // Hamburger Menu
+    const hamburgerMenu = document.getElementById('hamburgerMenu');
+    const nav = document.querySelector('nav');
+
+    hamburgerMenu.addEventListener('click', () => {
+        hamburgerMenu.classList.toggle('active');
+        nav.classList.toggle('active');
+    });
+
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('active');
+            nav.classList.remove('active');
+        });
+    });
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            faqItem.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --flag-green: #006A36;
+    --flag-green-dark: #004c28;
+    --flag-green-light: #1e7a49;
+    --flag-yellow: #FFCB00;
+    --flag-red: #D21034;
+    --flag-white: #FFFFFF;
+    --flag-dark: #111827;
+    --primary: var(--flag-green);
+    --primary-dark: var(--flag-green-dark);
+    --primary-light: var(--flag-green-light);
+    --secondary: var(--flag-yellow);
+    --warning: var(--flag-yellow);
+    --danger: var(--flag-red);
+}
+
+body {
+    color: var(--flag-dark);
+    background-color: #ffffff;
+}
+
+.bg-primary, .btn-primary, .badge-primary, .btn-success {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: var(--flag-white) !important;
+}
+
+.btn-primary:hover, .bg-primary:hover, .btn-success:hover {
+    background-color: var(--primary-dark) !important;
+    border-color: var(--primary-dark) !important;
+}
+
+.bg-warning, .btn-warning {
+    background-color: var(--warning) !important;
+    border-color: var(--warning) !important;
+    color: var(--flag-dark) !important;
+}
+
+.bg-danger, .btn-danger {
+    background-color: var(--danger) !important;
+    border-color: var(--danger) !important;
+    color: var(--flag-white) !important;
+}
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.text-warning {
+    color: var(--warning) !important;
+}
+
+.text-danger {
+    color: var(--danger) !important;
+}
+
+.border-primary {
+    border-color: var(--primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--secondary) !important;
+}
+
+.navbar, .footer, .header {
+    background-color: var(--primary) !important;
+    color: var(--flag-white) !important;
+}
