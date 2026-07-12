@@ -37,8 +37,9 @@
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             position: relative;
-            background: #f5f7fa;
+            background: #64748b;
             transition: background 0.3s, color 0.3s;
         }
 
@@ -46,7 +47,7 @@
             content: '';
             position: fixed;
             inset: 0;
-            background-image: url('{{ asset("images/image3.jpeg") }}');
+            /* background-image: url('{{ asset("images/image3.jpeg") }}'); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -227,14 +228,186 @@
 
         /* ===== MAIN CONTENT ===== */
         .main {
-            margin-left: 280px;
             flex: 1;
+            margin: 80px auto 4rem;
+            max-width: 1200px;
             padding: 2rem;
             overflow-y: auto;
         }
 
         body.dark-mode .main {
             background: transparent;
+        }
+
+        footer {
+            position: relative;
+            width: 100%;
+            background: #ffffff;
+            color: #1f2937;
+            margin-top: 4rem;
+            box-shadow: 0 -6px 24px rgba(15, 23, 42, 0.04);
+            z-index: 1;
+        }
+
+        footer .container {
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .footer-top {
+            padding: 4rem 0 2.5rem;
+        }
+
+        .footer-main {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 2.5rem;
+            padding-top: 6rem;
+        }
+
+        .footer-brand,
+        .footer-section,
+        .footer-actions {
+            flex: 1 1 180px;
+            min-width: 180px;
+        }
+
+        .footer-brand {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-logo {
+            max-width: 120px;
+            width: 100%;
+            height: auto;
+        }
+
+        .footer-title {
+            margin-bottom: 0.8rem;
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            color: #111827;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .footer-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-nav li + li {
+            margin-top: 0.45rem;
+        }
+
+        .footer-nav a {
+            color: #4b5563;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #d1d5db;
+            border-radius: 50%;
+            color: #4b5563;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .footer-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .footer-actions .btn-primary,
+        .footer-actions .btn-secondary {
+            width: 175px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            padding: 0.8rem 1rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .footer-actions .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+        }
+
+        .footer-actions .btn-secondary {
+            background: #e5e7eb;
+            color: #374151;
+            border: none;
+        }
+
+        .footer-bottom {
+            padding: 1.25rem 0;
+            border-top: 1px solid #e5e7eb;
+            background: #f8fafc;
+            text-align: center;
+        }
+
+        .footer-bottom-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .footer-bottom .current-year {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        @media (max-width: 991px) {
+            .footer-main {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-actions {
+                align-items: center;
+            }
         }
 
         /* Alertes */
@@ -760,9 +933,242 @@
     $user = auth()->user();
     $unreadNotificationsCount = Notification::where('user_id', auth()->id())->where('is_read', false)->count();
 @endphp
+<header class="site-header">
+    <div class="site-header-content">
+        <div class="site-header-left">
+            <button class="site-burger" id="siteBurgerMenu" aria-label="Ouvrir le menu" type="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <a href="{{ route('home') }}" class="site-logo">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="site-header-logo">
+                <div class="site-brand-text">
+                    <span class="site-brand-title">Service publique</span>
+                    <span class="site-brand-subtitle">de l'administration Togolaise</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="site-header-menu" id="siteHeaderMenu">
+            <button class="site-menu-close" id="siteMenuClose" aria-label="Fermer le menu" type="button">
+                ×
+            </button>
+            <a href="{{ route('home') }}">Accueil</a>
+            <a href="{{ route('dashboard') }}">Tableau de bord</a>
+            <a href="{{ route('perte.index') }}">Mes Déclarations</a>
+            <a href="{{ route('perte.create') }}">Nouvelle Déclaration</a>
+            <a href="{{ route('notifications.index') }}">Notifications</a>
+            <a href="{{ route('profile.index') }}">Paramètres</a>
+            <a href="{{ route('help.index') }}">Aide</a>
+            <a href="{{ route('help.public') }}">Aide publique</a>
+            <a href="#services">Services</a>
+            <a href="#comment">Comment ça marche</a>
+        </div>
+
+        <div class="site-header-actions">
+            <!-- <a href="{{ route('register') }}" class="site-btn site-btn-register">Créer un compte</a> -->
+            <a href="{{ route('profile.index') }}" class="site-btn site-btn-login">Mon compte</a>
+        </div>
+    </div>
+</header>
+
+<style>
+    .site-header {
+        background: linear-gradient(90deg, #006F89 0%, #316B53 100%);
+        padding: 1rem 5%;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .site-header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .site-header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex: 1 1 auto;
+    }
+
+    .site-burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        width: 42px;
+        height: 42px;
+        border: none;
+        background: rgba(255,255,255,0.16);
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 0 10px;
+    }
+
+    .site-burger span {
+        display: block;
+        height: 2px;
+        background: #ffffff;
+        border-radius: 999px;
+    }
+
+    .site-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+    }
+
+    .site-header-logo {
+        height: 46px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .site-brand-text {
+        display: flex;
+        flex-direction: column;
+        color: #ffffff;
+    }
+
+    .site-brand-title {
+        font-size: 1rem;
+        font-weight: 800;
+        line-height: 1.1;
+    }
+
+    .site-brand-subtitle {
+        font-size: 0.72rem;
+        font-weight: 500;
+        opacity: 0.85;
+    }
+
+    .site-header-menu {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 280px;
+        height: 100vh;
+        background: linear-gradient(180deg, #0f4d5a 0%, #1f5c42 100%);
+        box-shadow: 12px 0 28px rgba(0,0,0,0.25);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 5.5rem 1.25rem 1.25rem;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    .site-header-menu.active {
+        left: 0;
+    }
+
+    .site-header-menu a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        width: 100%;
+        padding: 0.75rem 0.9rem;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.08);
+    }
+
+    .site-menu-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border: none;
+        background: rgba(255,255,255,0.15);
+        color: #ffffff;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+
+    .site-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+
+    .site-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.7rem 1.2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .site-btn:hover {
+        transform: translateY(-1px);
+    }
+
+    .site-btn-register {
+        background: #ffffff;
+        color: #316B53;
+    }
+
+    .site-btn-login {
+        background: rgba(255, 255, 255, 0.16);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    @media (max-width: 768px) {
+        .site-header-content {
+            align-items: flex-start;
+        }
+
+        .site-header-actions {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const burger = document.getElementById('siteBurgerMenu');
+        const menu = document.getElementById('siteHeaderMenu');
+        const closeBtn = document.getElementById('siteMenuClose');
+
+        if (burger && menu) {
+            burger.addEventListener('click', function () {
+                menu.classList.add('active');
+            });
+        }
+
+        if (closeBtn && menu) {
+            closeBtn.addEventListener('click', function () {
+                menu.classList.remove('active');
+            });
+        }
+    });
+</script>
 
 <!-- Sidebar -->
-<div class="sidebar">
+<!-- <div class="sidebar">
     <div class="sidebar-header">
         <h2>
             <div class="flag-icon">
@@ -820,7 +1226,7 @@
             </button>
         </form>
     </div>
-</div>
+</div> -->
 
 <!-- Main Content -->
 <div class="main">
@@ -840,15 +1246,15 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </button>
-            <span class="page-title">Tableau de bord</span>
+            <span class="page-title">  Tableau de bord</span>
         </div>
         <div class="dashboard-left">
             <div class="dashboard-title">
-                <h1>Tableau de bord</h1>
-                <small>Suivez vos déclarations, notifications et actions en cours depuis un seul espace centralisé.</small>
+                <h1> Bienvenue {{ $user->name }} </h1>
+                <small>Compte Citoyen<br>Suivez vos déclarations, notifications et actions en cours depuis un seul espace centralisé.</small>
             </div>
             <div class="dashboard-subtitle">
-                Bonjour <strong>{{ $user->name }}</strong>, voici un aperçu clair de votre parcours sur DeclareTogo.
+                Bonjour <strong>{{ $user->name }}</strong>, voici un aperçu clair de votre parcours sur notre service de déclaration de pertes .
             </div>
         </div>
         <div class="header-right">
@@ -958,6 +1364,66 @@
         @endif
     </div>
 </div>
+<footer class="bg-white">
+        <div class="container footer-top">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <img alt="Logo" class="footer-logo" src="{{ asset('images/logo.png') }}"/>
+                </div>
+
+                <div class="footer-section">
+                    <h6 class="footer-title">Navigation</h6>
+                    <ul class="footer-nav">
+                        <li><a href="{{ route('home') }}">Accueil</a></li>
+                        <li><a href="{{ route('documents-trouves.search') }}">Recherche</a></li>
+                        <li><a href="{{ route('help.public') }}">Aide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h6 class="footer-title">Informations</h6>
+                    <ul class="footer-nav">
+                        <li><a href="{{ route('help.public') }}">À propos</a></li>
+                        <li><a href="{{ route('help.public') }}">FAQ</a></li>
+                        <li><a href="#">Annuaire</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h6 class="footer-title">Liens pratiques</h6>
+                    <ul class="footer-nav">
+                        <li><a href="#">Informations juridiques</a></li>
+                        <li>
+                            <div class="social-links mt-2">
+                                <a href="https://www.facebook.com/ServicepublicTG/" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                                <a href="https://twitter.com/ServicepublicTG" target="_blank" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                                <a href="https://www.instagram.com/servicepublictogo/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                                <a href="https://www.linkedin.com/company/service-public-administration-togolaise" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="footer-actions">
+                    <a class="btn btn-primary fw-bold" href="{{ route('profile.index') }}" style="text-decoration: none;">
+                        <i class="bi bi-person-fill me-2"></i>Mon compte
+                    </a>
+                    <a class="btn btn-secondary fw-bold" href="{{ route('help.public') }}" style="text-decoration: none;">
+                        Une question ?
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-row">
+                    <p>Service Public<br/>de l'administration togolaise</p>
+                    <p class="text-uppercase mb-0">© Service Public de l'administration togolaise <span class="current-year">{{ now()->year }}</span></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 <script>
     function toggleDarkMode() {
@@ -982,5 +1448,10 @@
         document.body.classList.add('dark-mode');
     }
 </script>
+
 </body>
+
+
+
 </html>
+

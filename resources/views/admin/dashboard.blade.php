@@ -4,6 +4,175 @@
 
 @section('content')
 <style>
+    body {
+        font-weight: 600;
+    }
+
+    footer {
+        background: #ffffff;
+        color: #1f2937;
+        margin-top: 4rem;
+        box-shadow: 0 -6px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .footer-top {
+        padding: 4rem 0 2.5rem;
+    }
+
+    .footer-main {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 2.5rem;
+        padding-left: 6rem;
+        padding-right: 6rem;
+    }
+
+    .footer-brand,
+    .footer-section,
+    .footer-actions {
+        flex: 1 1 180px;
+        min-width: 180px;
+    }
+
+    .footer-brand {
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-logo {
+        max-width: 120px;
+        width: 100%;
+        height: auto;
+    }
+
+    .footer-title {
+        margin-bottom: 0.8rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        color: #111827;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .footer-nav {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-nav li + li {
+        margin-top: 0.45rem;
+    }
+
+    .footer-nav a {
+        color: #4b5563;
+        font-size: 0.95rem;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .footer-nav a:hover {
+        color: var(--primary);
+    }
+
+    .social-links {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid #d1d5db;
+        border-radius: 50%;
+        color: #4b5563;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .footer-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-end;
+    }
+
+    .footer-actions .btn-primary,
+    .footer-actions .btn-secondary {
+        width: 175px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.8rem 1rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .footer-actions .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+    }
+
+    .footer-actions .btn-secondary {
+        background: #e5e7eb;
+        color: #374151;
+        border: none;
+    }
+
+    .footer-bottom {
+        padding: 1.25rem 0;
+        border-top: 1px solid #e5e7eb;
+        background: #f8fafc;
+        text-align: center;
+    }
+
+    .footer-bottom-row {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+    }
+
+    .footer-bottom p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #6b7280;
+    }
+
+    .footer-bottom .current-year {
+        color: var(--primary);
+        font-weight: 700;
+    }
+
+    @media (max-width: 991px) {
+        .footer-top {
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-main {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-actions {
+            align-items: center;
+        }
+    }
     /* Style pour la sidebar fixe - fusion des deux versions */
     .admin-sidebar {
         position: fixed;
@@ -11,7 +180,7 @@
         left: 0;
         height: 100vh;
         width: 280px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
         color: white;
         z-index: 1000;
         padding: 1rem;
@@ -20,12 +189,53 @@
         overflow-y: hidden;
         box-shadow: 2px 0 15px rgba(0,0,0,0.1);
     }
+
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .sidebar-header .flavicon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.16);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        flex-shrink: 0;
+    }
+
+    .sidebar-header .site-header-logo {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+    }
+
+    .sidebar-header h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        line-height: 1.2;
+    }
+
+    .sidebar-separator {
+        height: 1px;
+        background: rgba(255,255,255,0.22);
+        margin: 0.25rem 0 1rem;
+        border-radius: 999px;
+    }
     
     /* Contenu principal avec marge à gauche ajustée */
     .main-content {
         margin-left: 280px;
         padding: 2rem;
-        background: #f8f9fa;
+        background: #64748b;
         min-height: 100vh;
     }
     
@@ -394,7 +604,13 @@
 
 <!-- Sidebar fixe -->
 <div class="admin-sidebar">
-    <h4 class="mb-4 text-center">🇹🇬 DeclareTogo</h4>
+   <div class="sidebar-header">
+        <div class="flavicon">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="site-header-logo">
+        </div>
+        <h4>Service Public</h4>
+   </div>
+   <div class="sidebar-separator"></div>
     <nav class="nav flex-column">
         <a class="nav-link active" href="{{ route('admin.dashboard') }}">
             📊 Tableau de bord
@@ -417,7 +633,7 @@
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit" class="btn-logout-sidebar">
-                🚪 Se déconnecter
+                 Se déconnecter
             </button>
         </form>
     </div>
@@ -429,7 +645,7 @@
     <div class="admin-header">
         <div class="welcome-text">
             <h2>Bonjour, {{ Auth::user()->name }} 👋</h2>
-            <p>Bienvenue sur votre tableau de bord d'administration générale</p>
+            <p>Bienvenue sur votre tableau de bord d'administration général</p>
         </div>
 
         {{-- Dropdown profil --}}
@@ -623,6 +839,66 @@
             </div>
         </div>
     </div>
+ <!-- <footer class="bg-white bottom-0" style="left: 0; right: 0; clear: both;">
+    <div class="container footer-top">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <img alt="Logo" class="footer-logo" src="{{ asset('images/logo.png') }}"/>
+            </div>
+
+            <div class="footer-section">
+                <h6 class="footer-title">Navigation</h6>
+                <ul class="footer-nav">
+                    <li><a href="{{ route('home') }}">Accueil</a></li>
+                    <li><a href="{{ route('documents-trouves.search') }}">Recherche</a></li>
+                    <li><a href="{{ route('help.public') }}">Aide</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h6 class="footer-title">Informations</h6>
+                <ul class="footer-nav">
+                    <li><a href="{{ route('help.public') }}">À propos</a></li>
+                    <li><a href="{{ route('help.public') }}">FAQ</a></li>
+                    <li><a href="#">Annuaire</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h6 class="footer-title">Liens pratiques</h6>
+                <ul class="footer-nav">
+                    <li><a href="#">Informations juridiques</a></li>
+                    <li>
+                        <div class="social-links mt-2">
+                            <a href="https://www.facebook.com/ServicepublicTG/" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="https://twitter.com/ServicepublicTG" target="_blank" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
+                            <a href="https://www.instagram.com/servicepublictogo/" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.linkedin.com/company/service-public-administration-togolaise" target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-actions">
+                <a class="btn btn-primary fw-bold" href="{{ route('login') }}" style="text-decoration: none;">
+                    <i class="bi bi-person-fill me-2"></i>Se connecter
+                </a>
+                <a class="btn btn-secondary fw-bold" href="{{ route('help.public') }}" style="text-decoration: none;">
+                    Une question ?
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="footer-bottom-row">
+                <p>Service Public<br/>de l'administration togolaise</p>
+                <p class="text-uppercase mb-0">© Service Public de l'administration togolaise <span class="current-year">{{ now()->year }}</span></p>
+            </div>
+        </div>
+    </div>
+</footer> -->
 </div>
 
 <script>

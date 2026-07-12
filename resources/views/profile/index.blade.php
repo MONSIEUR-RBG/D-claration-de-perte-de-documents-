@@ -38,8 +38,9 @@
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             position: relative;
-            background: #f5f7fa;
+            background: #64748b;
             transition: background 0.3s, color 0.3s;
         }
 
@@ -47,7 +48,7 @@
             content: '';
             position: fixed;
             inset: 0;
-            background-image: url('{{ asset("images/image3.jpeg") }}');
+            /* background-image: url('{{ asset("images/image3.jpeg") }}'); */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -353,7 +354,7 @@
 
         /* Profile Header Card */
         .profile-header-card {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
             padding: 2rem;
             border-radius: 20px;
             margin-bottom: 2rem;
@@ -878,6 +879,28 @@
                 margin: 0 auto;
             }
         }
+        .site-header-logo {
+        height: 46px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .page-footer {
+        background: rgba(255,255,255,0.92);
+        border-top: 1px solid #e5e7eb;
+        padding: 1.25rem 2rem;
+        color: #374151;
+        text-align: center;
+        font-size: 0.95rem;
+        margin-left: 280px;
+        width: calc(100% - 280px);
+    }
+
+    .page-footer a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+    }
     </style>
 </head>
 <body>
@@ -901,7 +924,7 @@
     <div class="sidebar-header">
         <h2>
             <div class="flag-icon">
-                <svg viewBox="0 0 5 4" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+                <!-- <svg viewBox="0 0 5 4" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                     <rect width="5" height=".8" y="0"   fill="#006A36"/>
                     <rect width="5" height=".8" y=".8"  fill="#FFCB00"/>
                     <rect width="5" height=".8" y="1.6" fill="#006A36"/>
@@ -909,9 +932,10 @@
                     <rect width="5" height=".8" y="3.2" fill="#006A36"/>
                     <rect width="1.9" height="2.4" fill="#D21034"/>
                     <polygon points="0.95,0.38 1.07,0.76 1.47,0.76 1.16,0.99 1.28,1.37 0.95,1.14 0.62,1.37 0.74,0.99 0.43,0.76 0.83,0.76" fill="#FFFFFF"/>
-                </svg>
+                </svg> -->
+
             </div>
-            DeclareTogo
+            Service Public
         </h2>
         <div class="republic">RÉPUBLIQUE TOGOLAISE</div>
     </div>
@@ -951,7 +975,7 @@
             @csrf
             <button type="submit" class="logout-link">
                 <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                Déconnecter
+                Se déconnecter
             </button>
         </form>
     </div>
@@ -997,9 +1021,9 @@
                 <h2>{{ $user->name }}</h2>
                 <p>{{ $user->email }}</p>
                 <div class="profile-badges">
-                    <div class="badge">✓ Compte vérifié</div>
-                    <div class="badge">🇹🇬 Citoyen togolais</div>
-                    <div class="badge">📅 Membre depuis {{ $user->created_at->format('M Y') }}</div>
+                    <div class="badge">✓ Compte Citoyen</div>
+                    <div class="badge">Citoyen togolais</div>
+                    <div class="badge"> Membre depuis {{ $user->created_at->format('M Y') }}</div>
                 </div>
             </div>
         </div>
@@ -1070,6 +1094,10 @@
         </div>
     </div>
 </div>
+
+<footer class="page-footer">
+    <p>© {{ now()->year }} Servcice Plublic de l'Administration Togolaise — <a href="{{ route('help.public') }}">Aide</a> • <a href="{{ route('home') }}">Accueil</a></p>
+</footer>
 
 <!-- Modals (inchangés) -->
 <div class="modal" id="passwordModal"><div class="modal-content"><div class="modal-header"><div class="modal-title">Changer le mot de passe</div><button class="modal-close" onclick="closeModal('passwordModal')">×</button></div><form method="POST" action="{{ route('profile.password') }}">@csrf @method('PUT')<div class="form-group"><label class="form-label">Mot de passe actuel</label><input type="password" class="form-input" name="current_password" required></div><div class="form-group"><label class="form-label">Nouveau mot de passe</label><input type="password" class="form-input" name="password" required></div><div class="form-group"><label class="form-label">Confirmer</label><input type="password" class="form-input" name="password_confirmation" required></div><div class="btn-group"><button type="submit" class="btn btn-primary">Enregistrer</button><button type="button" class="btn btn-secondary" onclick="closeModal('passwordModal')">Annuler</button></div></form></div></div>
