@@ -177,9 +177,9 @@ class Perte extends Model
     /**
      * Générer un numéro de déclaration unique
      */
-    public static function generateNumeroDeclaration()
+    public static function generateNumeroDeclaration($year = null)
     {
-        $year = now()->year;
+        $year = $year ?: now()->year;
         $count = self::whereYear('created_at', $year)->count() + 1;
         return sprintf('DECL-%d-%05d', $year, $count);
     }
@@ -193,7 +193,8 @@ class Perte extends Model
 
         static::creating(function ($perte) {
             if (empty($perte->numero_declaration)) {
-                $perte->numero_declaration = self::generateNumeroDeclaration();
+                $year = $perte->created_at ? \Carbon\Carbon::parse($perte->created_at)->year : now()->year;
+                $perte->numero_declaration = self::generateNumeroDeclaration($year);
             }
             
             // Initialiser la date de déclaration si non définie

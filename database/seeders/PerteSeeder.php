@@ -86,9 +86,14 @@ class PerteSeeder extends Seeder
                 }
             }
 
+            $user = $users->random();
             Perte::create([
-                'user_id' => $users->random()->id,
+                'user_id' => $user->id,
                 'type_piece_id' => $typesPieces->random()->id,
+                'last_name' => $user->last_name,
+                'first_name' => $user->first_name,
+                'email' => $user->email,
+                'contact' => $user->contact,
                 'numero_piece' => 'N°' . strtoupper(substr(md5(rand()), 0, 10)),
                 'date_perte' => $datePerte,
                 'lieu_perte' => $lieux[array_rand($lieux)],
