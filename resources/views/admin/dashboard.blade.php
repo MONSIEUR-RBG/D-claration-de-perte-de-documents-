@@ -235,7 +235,7 @@
     .main-content {
         margin-left: 280px;
         padding: 2rem;
-        background: #64748b;
+        background: #e2e8f0;
         min-height: 100vh;
     }
     
@@ -343,7 +343,7 @@
     .profile-avatar {
         width: 45px;
         height: 45px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -400,7 +400,7 @@
 
     .dropdown-header {
         padding: 1.5rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
         border-radius: 16px 16px 0 0;
         color: white;
         text-align: center;
@@ -409,7 +409,7 @@
     .dropdown-header .avatar-large {
         width: 60px;
         height: 60px;
-        background: rgba(255,255,255,0.2);
+        background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -608,24 +608,24 @@
         <div class="flavicon">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="site-header-logo">
         </div>
-        <h4>Service Public</h4>
+        <h4>Service Public du Togo </h4>
    </div>
    <div class="sidebar-separator"></div>
     <nav class="nav flex-column">
         <a class="nav-link active" href="{{ route('admin.dashboard') }}">
-            📊 Tableau de bord
+             Tableau de bord
         </a>
         <a class="nav-link" href="{{ route('admin.users.index') }}">
-            👤 Gestion des Utilisateurs
+             Gestion des Utilisateurs
         </a>
         <a class="nav-link" href="{{ route('admin.types-pieces.index') }}">
-            🪪 Types de Pièces
+             Types de Pièces
         </a>
         <a class="nav-link" href="{{ route('admin.roles.index') }}">
-            🔐 Rôles & Droits
+             Rôles & Droits
         </a>
         <a class="nav-link" href="#">
-            📈 Statistiques & Rapports
+             Statistiques & Rapports
         </a>
     </nav>
     
@@ -644,7 +644,7 @@
     {{-- HEADER PROFESSIONNEL AVEC PROFIL ADMIN --}}
     <div class="admin-header">
         <div class="welcome-text">
-            <h2>Bonjour, {{ Auth::user()->name }} 👋</h2>
+            <h2>Bonjour, {{ Auth::user()->name }} </h2>
             <p>Bienvenue sur votre tableau de bord d'administration général</p>
         </div>
 
@@ -744,7 +744,7 @@
     {{-- GESTION UTILISATEURS --}}
     <div class="card mb-4 shadow-sm">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <strong>👥 Derniers Utilisateurs</strong>
+            <strong> Derniers Utilisateurs</strong>
             <div>
                 <a href="{{ route('admin.users.create') }}" class="btn btn-sm btn-primary me-2">+ Ajouter</a>
                 <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-secondary">Voir tout</a>
@@ -795,11 +795,11 @@
     </div>
 
     {{-- TYPES DE PIÈCES ET STATS --}}
-    <div class="row g-4">
+    <div class="row g-4" >
         <div class="col-md-6">
             <div class="card shadow-sm h-100">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <strong>🪪 Types de Pièces</strong>
+                <div class="card-header d-flex justify-content-between align-items-center" style="border-radius: 26px;">
+                    <strong>Types de Pièces</strong>
                     <a href="{{ route('admin.types-pieces.create') }}" class="btn btn-sm btn-primary">+ Ajouter</a>
                 </div>
                 <div class="card-body">
@@ -831,7 +831,7 @@
         <div class="col-md-6">
             <div class="card shadow-sm h-100">
                 <div class="card-header">
-                    <strong>📊 Statistiques d'Utilisation</strong>
+                    <strong>Statistiques d'Utilisation</strong>
                 </div>
                 <div class="card-body">
                     <canvas id="statsChart" style="max-height: 300px;"></canvas>

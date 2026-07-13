@@ -18,7 +18,7 @@
     .user-card { transition: transform 0.2s, box-shadow 0.2s; border-left: 4px solid transparent; }
     .user-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important; }
 
-    .sidebar {
+    /* .sidebar {
         width: 280px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         position: fixed; height: 100vh; z-index: 10; color: white;
@@ -28,8 +28,8 @@
     .sidebar-nav { flex: 1; padding: 1.5rem 1rem; overflow-y: auto; }
     .sidebar-nav a { text-decoration: none; color: rgba(255,255,255,0.8); font-weight: 600; padding: 0.9rem 1.2rem; border-radius: 10px; display: flex; align-items: center; gap: 0.8rem; transition: all 0.2s; margin-bottom: 0.3rem; }
     .sidebar-nav a:hover { background: rgba(255,255,255,0.15); color: white; }
-    .sidebar-nav a.active { background: rgba(255,255,255,0.2); color: white; }
-    .main-content { margin-left: 280px; flex: 1; padding: 2rem; background: #f8f9fa; min-height: 100vh; }
+    .sidebar-nav a.active { background: rgba(255,255,255,0.2); color: white; } */
+    .main-content { margin-left: 280px; flex: 1; padding: 2rem; background: #e2e8f0; min-height: 100vh; }
     .logout-section { position: absolute; bottom: 0; width: 100%; padding: 1.5rem 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
     .btn-logout { width: 100%; background: rgba(231,76,60,0.8); color: white; padding: 0.9rem; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
     .btn-logout:hover { background: #e74c3c; transform: translateY(-2px); }
@@ -61,33 +61,162 @@
     .pagination { margin-top: 2rem; display: flex; justify-content: center; gap: 0.5rem; }
     .pagination a, .pagination span { padding: 0.6rem 1rem; border-radius: 8px; background: white; color: #64748b; text-decoration: none; font-weight: 600; }
     .pagination .active { background: #10b981; color: white; }
+/* sidebar commun style début  */
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px;
+        background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
+        color: white;
+        z-index: 1000;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        overflow-y: hidden;
+        box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .sidebar-header .flavicon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.16);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        flex-shrink: 0;
+    }
+
+    .sidebar-header .site-header-logo {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+    }
+
+    .sidebar-header h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        line-height: 1.2;
+    }
+
+    .sidebar-separator {
+        height: 1px;
+        background: rgba(255,255,255,0.22);
+        margin: 0.25rem 0 1rem;
+        border-radius: 999px;
+    }
+     .nav-link.active {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        font-weight: 600;
+    }
+    
+    .logout-container {
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .btn-logout-sidebar {
+        background: rgba(231, 76, 60, 0.8);
+        border: none;
+        color: white;
+        width: 100%;
+        text-align: left;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .btn-logout-sidebar:hover {
+        background: #e74c3c;
+        transform: translateY(-2px);
+    }
+      .nav-link {
+        color: rgba(255,255,255,0.9);
+        transition: all 0.3s;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+    
+    .nav-link:hover {
+        color: white;
+        background: rgba(255,255,255,0.15);
+        transform: translateX(5px);
+    }
+/* sidebar commun style fin  */
+.card-body{
+    border-radius: 26px;
+}
 </style>
 
 <div class="d-flex">
-    <div class="sidebar">
-        <div class="sidebar-header">
-            <h2><span>🇹🇬</span> DeclareTogo</h2>
+  <div class="admin-sidebar">
+   <div class="sidebar-header">
+        <div class="flavicon">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="site-header-logo">
         </div>
-        <nav class="sidebar-nav">
-            <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">📊 Tableau de bord</a>
-            <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">👤 Gestion des Utilisateurs</a>
-            <a href="{{ route('admin.types-pieces.index') }}" class="{{ request()->routeIs('admin.types-pieces.*') ? 'active' : '' }}">🪪 Types de Pièces</a>
-            <a href="{{ route('admin.roles.index') }}" class="{{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">🔐 Rôles & Droits</a>
-            <a href="#" class="{{ request()->routeIs('admin.stats') ? 'active' : '' }}">📈 Statistiques & Rapports</a>
-        </nav>
-        <div class="logout-section">
-            <form method="POST" action="{{ route('logout') }}">@csrf
-                <button type="submit" class="btn-logout">🚪 Se déconnecter</button>
-            </form>
-        </div>
+        <h4>Service Public du Togo </h4>
+   </div>
+   <div class="sidebar-separator"></div>
+    <nav class="nav flex-column">
+        <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+             Tableau de bord
+        </a>
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
+             Gestion des Utilisateurs
+        </a>
+        <a class="nav-link" href="{{ route('admin.types-pieces.index') }}">
+             Types de Pièces
+        </a>
+        <a class="nav-link" href="{{ route('admin.roles.index') }}">
+             Rôles & Droits
+        </a>
+        <a class="nav-link" href="#">
+             Statistiques & Rapports
+        </a>
+    </nav>
+    
+    <div class="logout-container">
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="btn-logout-sidebar">
+                 Se déconnecter
+            </button>
+        </form>
     </div>
+</div>
 
     <div class="main-content">
 
         {{-- ===== HEADER AVEC PROFIL ===== --}}
         <div class="admin-header">
             <div class="welcome-text">
-                <h2>👥 Gestion des utilisateurs</h2>
+                <h2> Gestion des utilisateurs</h2>
                 <p>Créez, modifiez et gérez les comptes de la plateforme</p>
             </div>
             <div style="display:flex;align-items:center;gap:1rem;">
@@ -134,7 +263,7 @@
             <div class="col-md-3 mb-3"><div class="card shadow-sm border-start border-info border-4 h-100"><div class="card-body"><h6 class="text-muted mb-2">Citoyens</h6><h3 class="mb-0">{{ $users->where('role','user')->count() }}</h3></div></div></div>
         </div>
 
-        <div class="card shadow-sm mb-4">
+        <div class="card shadow-sm mb-4 ">
             <div class="card-body">
                 <form method="GET" action="{{ route('admin.users.index') }}" class="row g-3">
                     <div class="col-md-4"><input type="text" name="search" class="form-control" placeholder="🔍 Rechercher (nom, email)" value="{{ request('search') }}"></div>

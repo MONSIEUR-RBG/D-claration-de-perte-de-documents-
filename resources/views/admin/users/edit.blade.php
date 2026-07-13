@@ -30,7 +30,7 @@
         .profile-dropdown { position:relative; cursor:pointer; }
         .profile-trigger { display:flex; align-items:center; gap:1rem; padding:0.5rem 1rem; background:#f8f9fa; border-radius:50px; transition:all 0.3s; border:1px solid #e9ecef; }
         .profile-trigger:hover { background:#f1f5f9; border-color:#667eea; }
-        .profile-avatar { width:45px; height:45px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:1.2rem; }
+        .profile-avatar { width:45px; height:45px; background: linear-gradient(135deg, #316B53 0%, #006F89 100%)); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:700; font-size:1.2rem; }
         .profile-info { text-align:right; }
         .profile-name { font-weight:700; color:#2c3e50; font-size:0.95rem; }
         .profile-role { font-size:0.75rem; color:#6c757d; }
@@ -39,7 +39,7 @@
         .dropdown-menu-custom { position:absolute; top:calc(100% + 10px); right:0; width:280px; background:white; border-radius:16px; box-shadow:0 10px 40px rgba(0,0,0,0.15); opacity:0; visibility:hidden; transform:translateY(-10px); transition:all 0.3s; z-index:1000; }
         .profile-dropdown.active .dropdown-menu-custom { opacity:1; visibility:visible; transform:translateY(0); }
         .dropdown-header { padding:1.5rem; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:16px 16px 0 0; color:white; text-align:center; }
-        .dropdown-header .avatar-large { width:60px; height:60px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem; font-size:1.8rem; font-weight:700; }
+        .dropdown-header .avatar-large { width:60px; height:60px; background: linear-gradient(135deg, #316B53 0%, #006F89 100%); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 0.75rem; font-size:1.8rem; font-weight:700; }
         .dropdown-header .user-email { font-size:0.8rem; opacity:0.9; }
         .dropdown-divider { height:1px; background:#e9ecef; margin:0.5rem 0; }
         .dropdown-item { display:flex; align-items:center; gap:0.75rem; padding:0.75rem 1.5rem; color:#2c3e50; text-decoration:none; transition:all 0.2s; font-size:0.9rem; }

@@ -11,7 +11,7 @@
         left: 0;
         height: 100vh;
         width: 280px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
         color: white;
         z-index: 1000;
         padding: 1rem;
@@ -20,11 +20,52 @@
         overflow-y: hidden;
         box-shadow: 2px 0 15px rgba(0,0,0,0.1);
     }
+
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .sidebar-header .flavicon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.16);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        flex-shrink: 0;
+    }
+
+    .sidebar-header .site-header-logo {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+    }
+
+    .sidebar-header h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        line-height: 1.2;
+    }
+
+    .sidebar-separator {
+        height: 1px;
+        background: rgba(255,255,255,0.22);
+        margin: 0.25rem 0 1rem;
+        border-radius: 999px;
+    }
     
     .main-content {
         margin-left: 280px;
         padding: 2rem;
-        background: #f8f9fa;
+        background: #e2e8f0;
         min-height: 100vh;
     }
     
@@ -110,7 +151,8 @@
     }
     
     .profile-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
+;
         padding: 2rem;
         text-align: center;
         color: white;
@@ -212,26 +254,43 @@
 </style>
 
 <div class="admin-sidebar">
-    <h4 class="mb-4 text-center">🇹🇬 DeclareTogo</h4>
+   <div class="sidebar-header">
+        <div class="flavicon">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="site-header-logo">
+        </div>
+        <h4>Service Public</h4>
+   </div>
+   <div class="sidebar-separator"></div>
     <nav class="nav flex-column">
-        <a class="nav-link" href="{{ route('admin.dashboard') }}">📊 Tableau de bord</a>
-        <a class="nav-link" href="{{ route('admin.users.index') }}">👤 Gestion des Utilisateurs</a>
-        <a class="nav-link" href="{{ route('admin.types-pieces.index') }}">🪪 Types de Pièces</a>
-        <a class="nav-link" href="{{ route('admin.roles.index') }}">🔐 Rôles & Droits</a>
-        <a class="nav-link" href="#">📈 Statistiques & Rapports</a>
+        <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+             Tableau de bord
+        </a>
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
+             Gestion des Utilisateurs
+        </a>
+        <a class="nav-link" href="{{ route('admin.types-pieces.index') }}">
+             Types de Pièces
+        </a>
+        <a class="nav-link" href="{{ route('admin.roles.index') }}">
+             Rôles & Droits
+        </a>
+        <a class="nav-link" href="#">
+             Statistiques & Rapports
+        </a>
     </nav>
     
     <div class="logout-container">
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="btn-logout-sidebar">🚪 Se déconnecter</button>
+            <button type="submit" class="btn-logout-sidebar">
+                 Se déconnecter
+            </button>
         </form>
     </div>
 </div>
-
 <div class="main-content">
     <div class="page-header">
-        <h1>👤 Mon Profil Administrateur</h1>
+        <h1> Mon Profil Administrateur</h1>
         <p>Gérez vos informations personnelles</p>
     </div>
 
@@ -301,7 +360,7 @@
         </div>
     </div>
 </div>
-<footer class="bg-white bottom-0" style="left: 0; right: 0; clear: both;">
+<!-- <footer class="bg-white bottom-0" style="left: 0; right: 0; clear: both;">
     <div class="container footer-top">
         <div class="footer-main">
             <div class="footer-brand">
@@ -360,7 +419,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer> -->
 
 <style>
     footer {
