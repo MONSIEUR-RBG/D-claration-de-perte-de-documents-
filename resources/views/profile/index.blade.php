@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Paramètres - DeclareTogo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
+<style>
         /* ===== MÊMES STYLES QUE LE DASHBOARD ===== */
         * {
             margin: 0;
@@ -901,7 +901,7 @@
         text-decoration: none;
         font-weight: 600;
     }
-    </style>
+</style>
 </head>
 <body>
 

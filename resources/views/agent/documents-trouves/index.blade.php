@@ -16,14 +16,13 @@
         }
 
         body { 
-            display: flex; 
             min-height: 100vh; 
             background: #f5f7fa;
         }
 
         .sidebar {
             width: 280px;
-            background: white;
+            background: linear-gradient(135deg, #316B53 0%, #006F89 100%);;
             box-shadow: 2px 0 15px rgba(0,0,0,0.08);
             display: flex;
             flex-direction: column;
@@ -37,6 +36,20 @@
             border-bottom: 1px solid #e8eef5;
         }
 
+        .sidebar-header .site-header-logo {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+    }
+
+    .sidebar-header h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        line-height: 1.2;
+    }
+    
         .sidebar-header h2 { 
             font-size: 1.3rem;
             font-weight: 800;
@@ -68,7 +81,7 @@
 
         .sidebar-nav a {
             text-decoration: none;
-            color: #64748b;
+            color: white;
             font-weight: 600;
             padding: 0.9rem 1.2rem;
             border-radius: 10px;
@@ -118,9 +131,18 @@
         }
 
         /* Main */
-        .main {
+        .page-wrapper {
             margin-left: 280px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #f5f7fa;
+        }
+
+        .main {
             flex: 1;
+            display: flex;
+            flex-direction: column;
             background: #f5f7fa;
         }
 
@@ -141,6 +163,7 @@
 
         .content {
             padding: 2.5rem;
+            flex: 1;
         }
 
         .stats-grid {
@@ -282,6 +305,23 @@
             display: flex;
             justify-content: center;
             gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .page-footer {
+            background: rgba(255,255,255,0.95);
+            border-top: 1px solid #e5e7eb;
+            padding: 1.25rem 2rem;
+            color: #374151;
+            text-align: center;
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+
+        .page-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
         }
 
         .alert {
@@ -300,10 +340,12 @@
 
     <!-- Sidebar Agent -->
     <div class="sidebar">
-        <div class="sidebar-header">
-            <h2><span>🇹🇬</span> DeclareTogo</h2>
-            <div class="agent-badge">👮 AGENT</div>
+         <div class="sidebar-header">
+        <div class="flavicon">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="site-header-logo">
         </div>
+        <h4>Service Public</h4>
+   </div>
         <nav class="sidebar-nav">
             <a href="{{ route('agent.dashboard') }}" class="{{ request()->routeIs('agent.dashboard') ? 'active' : '' }}">Dashboard</a>
             <a href="{{ route('agent.documents-trouves.index') }}" class="active">Documents trouvés</a>
@@ -319,13 +361,14 @@
         </div>
     </div>
 
-    <!-- Main -->
-    <div class="main">
-        <div class="top-bar">
-            <h1>📄 Documents trouvés</h1>
-        </div>
+    <div class="page-wrapper">
+        <!-- Main -->
+        <div class="main">
+            <div class="top-bar">
+                <h1>📄 Documents trouvés</h1>
+            </div>
 
-        <div class="content">
+            <div class="content">
             @if(session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
             @endif
@@ -415,7 +458,12 @@
             <div class="pagination">
                 {{ $documentsTrouves->appends(request()->query())->links() }}
             </div>
+            </div>
         </div>
+
+        <footer class="page-footer">
+            <p>© {{ now()->year }} Service Public de l'Administration Togolaise — <a href="{{ route('help.public') }}">Aide</a> • <a href="{{ route('home') }}">Accueil</a></p>
+        </footer>
     </div>
 
 </body>

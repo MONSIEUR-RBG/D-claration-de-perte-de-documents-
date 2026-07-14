@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard Agent - DeclareTogo</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         * { 
             box-sizing: border-box; 
@@ -15,7 +16,6 @@
         }
 
         body { 
-            display: flex; 
             min-height: 100vh; 
             background: #f5f7fa;
         }
@@ -23,7 +23,7 @@
         /* Sidebar */
         .sidebar {
             width: 280px;
-            background: white;
+             background: linear-gradient(135deg, #316B53 0%, #006F89 100%);
             box-shadow: 2px 0 15px rgba(0,0,0,0.08);
             display: flex;
             flex-direction: column;
@@ -32,10 +32,47 @@
             z-index: 10;
         }
 
-        .sidebar-header {
-            padding: 2rem 1.5rem;
-            border-bottom: 1px solid #e8eef5;
-        }
+       
+    .sidebar-header {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .sidebar-header .flavicon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:80px;
+        height: 80px;
+        border-radius: 12px;
+        background: rgba(255,255,255,0.16);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+        flex-shrink: 0;
+    }
+
+    .sidebar-header .site-header-logo {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+    }
+
+    .sidebar-header h4 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        line-height: 1.2;
+    }
+
+    .sidebar-separator {
+        height: 1px;
+        background: rgba(255,255,255,0.22);
+        margin: 0.25rem 0 1rem;
+        border-radius: 999px;
+    }
 
         .sidebar-header h2 { 
             font-size: 1.3rem;
@@ -68,7 +105,7 @@
 
         .sidebar-nav a {
             text-decoration: none;
-            color: #64748b;
+            color: #e8eef7;
             font-weight: 600;
             padding: 0.9rem 1.2rem;
             border-radius: 10px;
@@ -92,15 +129,19 @@
             border: 2px solid #f39c12;
         }
 
-        .sidebar-nav a svg {
+        .sidebar-nav a i {
             width: 20px;
             height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
         }
 
         /* Badge de notification dans sidebar */
         .nav-badge {
             margin-left: auto;
-            background: #e74c3c;
+            background: #D9534F;
             color: white;
             padding: 0.2rem 0.6rem;
             border-radius: 10px;
@@ -126,7 +167,7 @@
         .btn-logout {
             width: 100%;
             background: #fff1f0;
-            color: #e74c3c;
+            color: #D9534F;
             padding: 0.9rem;
             border: none;
             border-radius: 10px;
@@ -144,11 +185,20 @@
             background: #ffe8e6;
         }
 
-        /* Main */
-        .main {
+        /* Main layout */
+        .page-wrapper {
             margin-left: 280px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #e2e8f0;
+        }
+
+        .main {
             flex: 1;
-            background: #f5f7fa;
+            display: flex;
+            flex-direction: column;
+            background: #e2e8f0;
         }
 
         /* Top Bar */
@@ -204,7 +254,7 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #e74c3c;
+            background: #D9534F;
             color: white;
             font-size: 0.7rem;
             padding: 0.2rem 0.5rem;
@@ -216,6 +266,7 @@
         /* Content */
         .content {
             padding: 2.5rem;
+            flex: 1;
         }
 
         /* Alert */
@@ -232,13 +283,13 @@
         .alert-success {
             background: #d4edda;
             color: #155724;
-            border-left: 4px solid #27ae60;
+            border-left: 4px solid #50A842;
         }
 
         .alert-error {
             background: #f8d7da;
             color: #721c24;
-            border-left: 4px solid #e74c3c;
+            border-left: 4px solid #D9534F;
         }
 
         @keyframes slideDown {
@@ -277,10 +328,10 @@
 
         .stat-card.total::before { background: #3498db; }
         .stat-card.pending::before { background: #f39c12; }
-        .stat-card.approved::before { background: #27ae60; }
-        .stat-card.rejected::before { background: #e74c3c; }
+        .stat-card.approved::before { background: #50A842; }
+        .stat-card.rejected::before { background: #D9534F; }
         .stat-card.mine::before { background: #9b59b6; }
-        .stat-card.found::before { background: #16a085; }
+        .stat-card.found::before { background: #50A842; }
 
         .stat-card:hover {
             transform: translateY(-5px);
@@ -304,12 +355,23 @@
             font-size: 1.5rem;
         }
 
+        .stat-icon i {
+            font-size: 1.25rem;
+        }
+
         .stat-card.total .stat-icon { background: rgba(52, 152, 219, 0.1); }
         .stat-card.pending .stat-icon { background: rgba(243, 156, 18, 0.1); }
         .stat-card.approved .stat-icon { background: rgba(39, 174, 96, 0.1); }
         .stat-card.rejected .stat-icon { background: rgba(231, 76, 60, 0.1); }
         .stat-card.mine .stat-icon { background: rgba(155, 89, 182, 0.1); }
         .stat-card.found .stat-icon { background: rgba(22, 160, 133, 0.1); }
+
+        .stat-card.total .stat-icon i { color: #3498db; }
+        .stat-card.pending .stat-icon i { color: #f39c12; }
+        .stat-card.approved .stat-icon i { color: #50A842; }
+        .stat-card.rejected .stat-icon i { color: #D9534F; }
+        .stat-card.mine .stat-icon i { color: #9b59b6; }
+        .stat-card.found .stat-icon i { color: #50A842; }
 
         .stat-value {
             font-size: 2.2rem;
@@ -363,11 +425,11 @@
         }
 
         .section-action.green {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            background: linear-gradient(135deg, #50A842, #66B85C);
         }
 
         .section-action.red {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: linear-gradient(135deg, #D9534F, #C75C5C);
         }
 
         /* Documents Trouvés Card */
@@ -386,7 +448,7 @@
             border-radius: 12px;
             margin-bottom: 1rem;
             background: #f8f9fa;
-            border-left: 4px solid #16a085;
+            border-left: 4px solid #50A842;
             transition: all 0.2s;
         }
 
@@ -398,7 +460,7 @@
         .found-doc-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #16a085, #1abc9c);
+            background: linear-gradient(135deg, #50A842, #66B85C);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -452,12 +514,12 @@
         }
 
         .btn-found-primary {
-            background: #16a085;
+            background: #50A842;
             color: white;
         }
 
         .btn-found-primary:hover {
-            background: #138d75;
+            background: #409437;
             transform: translateY(-2px);
         }
 
@@ -467,22 +529,22 @@
         }
 
         .btn-found-warning:hover {
-            background: #e67e22;
+            background: #E59A5A;
             transform: translateY(-2px);
         }
 
         .btn-found-success {
-            background: #27ae60;
+            background: #50A842;
             color: white;
         }
 
         .btn-found-success:hover {
-            background: #229954;
+            background: #409437;
             transform: translateY(-2px);
         }
 
         .match-badge {
-            background: #27ae60;
+            background: #50A842;
             color: white;
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
@@ -539,30 +601,64 @@
         }
 
         /* Pagination */
-        .pagination {
+        .pagination-wrapper {
             display: flex;
             justify-content: center;
-            gap: 0.5rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
         }
 
-        .pagination a, .pagination span {
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+        .pagination {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.45rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .pagination li {
+            display: inline-flex;
+        }
+
+        .pagination a,
+        .pagination span,
+        .pagination .page-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2.5rem;
+            height: 2.5rem;
+            padding: 0 0.75rem;
+            border-radius: 999px;
             background: white;
             color: #64748b;
             text-decoration: none;
             border: 1px solid #e2e8f0;
+            font-weight: 700;
+            line-height: 1;
         }
 
-        .pagination a:hover {
+        .pagination a:hover,
+        .pagination .page-link:hover {
             background: #f1f5f9;
+            color: #1e3a5f;
         }
 
+        .pagination .active .page-link,
         .pagination .active span {
             background: #f39c12;
             color: white;
             border-color: #f39c12;
+        }
+
+        .pagination .disabled .page-link,
+        .pagination .disabled span {
+            opacity: 0.5;
+            pointer-events: none;
         }
 
         /* Responsive */
@@ -571,6 +667,10 @@
                 width: 100%;
                 position: relative;
                 height: auto;
+            }
+
+            .page-wrapper {
+                margin-left: 0;
             }
 
             .main {
@@ -589,32 +689,42 @@
                 flex-direction: row;
             }
         }
+        .page-footer {
+            background: rgba(255,255,255,0.95);
+            border-top: 1px solid #e5e7eb;
+            padding: 1.25rem 2rem;
+            color: #374151;
+            text-align: center;
+            font-size: 0.95rem;
+            margin-top: auto;
+        }
+
+        .page-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 
     <!-- Sidebar -->
     <div class="sidebar">
-        <div class="sidebar-header">
-            <h2>
-                <span>🇹🇬</span> 
-                DeclareTogo
-            </h2>
-            <div class="agent-badge">👮 AGENT</div>
+       <div class="sidebar-header">
+        <div class="flavicon">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="site-header-logo">
         </div>
+        <h4>Service Public</h4>
+   </div>
 
         <nav class="sidebar-nav">
             <a href="{{ route('agent.dashboard') }}" class="{{ request()->routeIs('agent.dashboard') && !request('statut') ? 'active' : '' }}">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                </svg>
+                <i class="fa-solid fa-house"></i>
                 Dashboard
             </a>
 
             <a href="{{ route('agent.dashboard', ['statut' => 'en_attente']) }}" class="{{ request('statut') == 'en_attente' ? 'active' : '' }}">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+                <i class="fa-solid fa-file-alt"></i>
                 Déclarations Perte
                 @if($stats['en_attente'] > 0)
                     <span class="nav-badge">{{ $stats['en_attente'] }}</span>
@@ -622,9 +732,7 @@
             </a>
 
             <a href="{{ route('agent.documents-trouves.index') }}" class="{{ request()->routeIs('agent.documents-trouves.*') ? 'active' : '' }}">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-                </svg>
+                <i class="fa-solid fa-magnifying-glass"></i>
                 Documents Trouvés
                 @if($statsDocumentsTrouves['en_attente'] > 0)
                     <span class="nav-badge orange">{{ $statsDocumentsTrouves['en_attente'] }}</span>
@@ -632,16 +740,12 @@
             </a>
 
             <a href="{{ route('agent.dashboard', ['statut' => 'validee']) }}" class="{{ request('statut') == 'validee' ? 'active' : '' }}">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+                <i class="fa-solid fa-circle-check"></i>
                 Validées
             </a>
 
             <a href="{{ route('agent.dashboard', ['statut' => 'rejetee']) }}" class="{{ request('statut') == 'rejetee' ? 'active' : '' }}">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+                <i class="fa-solid fa-circle-xmark"></i>
                 Rejetées
             </a>
         </nav>
@@ -650,49 +754,48 @@
             <form method="POST" action="{{ route('logout') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir vous déconnecter ?')">
                 @csrf
                 <button type="submit" class="btn-logout">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:18px;height:18px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                    </svg>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                     Se déconnecter
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Main -->
-    <div class="main">
-        <!-- Top Bar -->
-        <div class="top-bar">
-            <div class="top-bar-left">
-                <h1>🎯 Dashboard Agent</h1>
-                <p>Gérez les déclarations et documents trouvés</p>
-            </div>
-            <div class="top-bar-right">
-                <div class="notification-badge" onclick="window.location.href='{{ route('agent.dashboard', ['statut' => 'en_attente']) }}'">
-                    🔔
-                    @php
-                        $totalNotif = $stats['en_attente'] + $statsDocumentsTrouves['en_attente'];
-                    @endphp
-                    @if($totalNotif > 0)
-                        <span class="notification-count">{{ $totalNotif }}</span>
-                    @endif
+    <div class="page-wrapper">
+        <!-- Main -->
+        <div class="main">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <h1> Dashboard Agent</h1>
+                    <p>Gérez les déclarations et documents trouvés</p>
+                </div>
+                <div class="top-bar-right">
+                    <div class="notification-badge" onclick="window.location.href='{{ route('agent.dashboard', ['statut' => 'en_attente']) }}'">
+                        <i class="fa-solid fa-bell"></i>
+                        @php
+                            $totalNotif = $stats['en_attente'] + $statsDocumentsTrouves['en_attente'];
+                        @endphp
+                        @if($totalNotif > 0)
+                            <span class="notification-count">{{ $totalNotif }}</span>
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Content -->
-        <div class="content">
+            <!-- Content -->
+            <div class="content">
             <!-- Alerts -->
             @if(session('success'))
                 <div class="alert alert-success">
-                    <span>✅</span>
+                    <i class="fa-solid fa-circle-check"></i>
                     <span>{{ session('success') }}</span>
                 </div>
             @endif
 
             @if(session('error'))
                 <div class="alert alert-error">
-                    <span>❌</span>
+                    <i class="fa-solid fa-circle-exclamation"></i>
                     <span>{{ session('error') }}</span>
                 </div>
             @endif
@@ -701,7 +804,7 @@
             <div class="stats-grid">
                 <div class="stat-card total" onclick="window.location.href='{{ route('agent.dashboard') }}'">
                     <div class="stat-header">
-                        <div class="stat-icon">📊</div>
+                        <div class="stat-icon"><i class="fa-solid fa-file-contract"></i></div>
                     </div>
                     <div class="stat-value">{{ $stats['total'] }}</div>
                     <div class="stat-label">Déclarations Perte</div>
@@ -709,7 +812,7 @@
 
                 <div class="stat-card pending" onclick="window.location.href='{{ route('agent.dashboard', ['statut' => 'en_attente']) }}'">
                     <div class="stat-header">
-                        <div class="stat-icon">⏳</div>
+                        <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
                     </div>
                     <div class="stat-value">{{ $stats['en_attente'] }}</div>
                     <div class="stat-label">Perte en attente</div>
@@ -717,7 +820,7 @@
 
                 <div class="stat-card found" onclick="window.location.href='{{ route('agent.documents-trouves.index') }}'">
                     <div class="stat-header">
-                        <div class="stat-icon">📦</div>
+                        <div class="stat-icon"><i class="fa-solid fa-folder-open"></i></div>
                     </div>
                     <div class="stat-value">{{ $statsDocumentsTrouves['total'] }}</div>
                     <div class="stat-label">Documents Trouvés</div>
@@ -725,7 +828,7 @@
 
                 <div class="stat-card approved" onclick="window.location.href='{{ route('agent.dashboard', ['statut' => 'validee']) }}'">
                     <div class="stat-header">
-                        <div class="stat-icon">✅</div>
+                        <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
                     </div>
                     <div class="stat-value">{{ $stats['validees'] }}</div>
                     <div class="stat-label">Validées</div>
@@ -733,7 +836,7 @@
 
                 <div class="stat-card rejected" onclick="window.location.href='{{ route('agent.dashboard', ['statut' => 'rejetee']) }}'">
                     <div class="stat-header">
-                        <div class="stat-icon">❌</div>
+                        <div class="stat-icon"><i class="fa-solid fa-circle-xmark"></i></div>
                     </div>
                     <div class="stat-value">{{ $stats['rejetees'] }}</div>
                     <div class="stat-label">Rejetées</div>
@@ -741,7 +844,7 @@
 
                 <div class="stat-card mine">
                     <div class="stat-header">
-                        <div class="stat-icon">👤</div>
+                        <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
                     </div>
                     <div class="stat-value">{{ $stats['traitees_par_moi'] }}</div>
                     <div class="stat-label">Traitées par moi</div>
@@ -751,15 +854,15 @@
             <!-- 🔥 FILTER TABS -->
             <div class="filter-tabs">
                 <a href="{{ route('agent.dashboard') }}" class="filter-tab {{ !request('statut') ? 'active' : '' }}">Toutes</a>
-                <a href="{{ route('agent.dashboard', ['statut' => 'en_attente']) }}" class="filter-tab {{ request('statut') == 'en_attente' ? 'active' : '' }}">⏳ En attente</a>
-                <a href="{{ route('agent.dashboard', ['statut' => 'validee']) }}" class="filter-tab {{ request('statut') == 'validee' ? 'active' : '' }}">✅ Validées</a>
-                <a href="{{ route('agent.dashboard', ['statut' => 'rejetee']) }}" class="filter-tab {{ request('statut') == 'rejetee' ? 'active' : '' }}">❌ Rejetées</a>
+                <a href="{{ route('agent.dashboard', ['statut' => 'en_attente']) }}" class="filter-tab {{ request('statut') == 'en_attente' ? 'active' : '' }}"> En attente</a>
+                <a href="{{ route('agent.dashboard', ['statut' => 'validee']) }}" class="filter-tab {{ request('statut') == 'validee' ? 'active' : '' }}"> Validées</a>
+                <a href="{{ route('agent.dashboard', ['statut' => 'rejetee']) }}" class="filter-tab {{ request('statut') == 'rejetee' ? 'active' : '' }}"> Rejetées</a>
             </div>
 
             <!-- 🔥 SECTION DÉCLARATIONS DE PERTE -->
             <div class="section-header">
                 <div class="section-title">
-                    📋 Déclarations de Perte
+                     Déclarations de Perte
                     @if($stats['en_attente'] > 0 && !request('statut'))
                         <span class="match-badge" style="background: #f39c12;">{{ $stats['en_attente'] }} en attente</span>
                     @endif
@@ -771,28 +874,26 @@
                     @foreach($pertes as $perte)
                         @php
                             $statusColor = '#f39c12';
-                            $statusIcon = '⏳';
+                            $statusIcon = '<i class="fa-solid fa-hourglass-half"></i>';
                             $statusText = 'En attente';
                             
                             if($perte->statut == 'validee') {
-                                $statusColor = '#27ae60';
-                                $statusIcon = '✅';
+                                $statusColor = '#50A842';
+                                $statusIcon = '<i class="fa-solid fa-circle-check"></i>';
                                 $statusText = 'Validée';
                             } elseif($perte->statut == 'rejetee') {
-                                $statusColor = '#e74c3c';
-                                $statusIcon = '❌';
+                                $statusColor = '#D9534F';
+                                $statusIcon = '<i class="fa-solid fa-circle-xmark"></i>';
                                 $statusText = 'Rejetée';
                             }
                             
-                            $docIcon = '📄';
-                            if($perte->type_piece == 'CNI') $docIcon = '🪪';
-                            elseif($perte->type_piece == 'Passeport') $docIcon = '🛂';
-                            elseif($perte->type_piece == 'Permis de conduire') $docIcon = '🚗';
+                            $docIcon = '<i class="fa-solid fa-file-alt"></i>';
+                            if($perte->type_piece == 'CNI') $docIcon = '<i class="fa-solid fa-id-card"></i>';
                         @endphp
                         
                         <div class="found-doc-item" style="border-left-color: {{ $statusColor }};">
                             <div class="found-doc-icon" style="background: linear-gradient(135deg, {{ $statusColor }}, {{ $statusColor }}dd);">
-                                {{ $docIcon }}
+                                {!! $docIcon !!}
                             </div>
                             <div class="found-doc-info">
                                 <div class="found-doc-type">
@@ -805,20 +906,20 @@
                                     <strong>{{ $perte->first_name }} {{ $perte->last_name }}</strong>
                                 </div>
                                 <div class="found-doc-meta">
-                                    <span>📍 {{ $perte->lieu_perte }}</span>
-                                    <span>📅 Perte le {{ \Carbon\Carbon::parse($perte->date_perte)->format('d/m/Y') }}</span>
-                                    <span>📞 {{ $perte->contact }}</span>
+                                    <span> {{ $perte->lieu_perte }}</span>
+                                    <span> Perte le {{ \Carbon\Carbon::parse($perte->date_perte)->format('d/m/Y') }}</span>
+                                    <span> {{ $perte->contact }}</span>
                                     @if($perte->numero_declaration)
-                                        <span>🔢 {{ $perte->numero_declaration }}</span>
+                                        <span> {{ $perte->numero_declaration }}</span>
                                     @endif
                                 </div>
                             </div>
                             <div class="found-doc-actions">
                                 <a href="{{ route('agent.perte.show', $perte->id) }}" class="btn-found btn-found-primary">
-                                    👁️ Voir détails
+                                     Voir détails
                                 </a>
                                 <span class="match-badge" style="background: {{ $statusColor }};">
-                                    {{ $statusIcon }} {{ $statusText }}
+                                    {!! $statusIcon !!} {{ $statusText }}
                                 </span>
                             </div>
                         </div>
@@ -826,13 +927,15 @@
 
                     <!-- Pagination -->
                     @if(method_exists($pertes, 'links'))
-                        <div class="pagination">
-                            {{ $pertes->links() }}
+                        <div class="pagination-wrapper">
+                            <div class="pagination">
+                                {{ $pertes->links() }}
+                            </div>
                         </div>
                     @endif
                 @else
                     <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-icon"><i class="fa-solid fa-box-open"></i></div>
                         <p><strong>Aucune déclaration de perte trouvée</strong></p>
                         <p style="font-size: 0.9rem; margin-top: 0.5rem;">
                             @if(request('statut'))
@@ -848,13 +951,13 @@
             <!-- 🔥 SECTION DOCUMENTS TROUVÉS -->
             <div class="section-header" style="margin-top: 2rem;">
                 <div class="section-title">
-                    📦 Documents Trouvés Récents
+                     Documents Trouvés Récents
                     @if($statsDocumentsTrouves['en_attente'] > 0)
-                        <span class="match-badge" style="background: #16a085;">{{ $statsDocumentsTrouves['en_attente'] }} nouveau(x)</span>
+                        <span class="match-badge" style="background: #50A842;">{{ $statsDocumentsTrouves['en_attente'] }} nouveau(x)</span>
                     @endif
                 </div>
                 <a href="{{ route('agent.documents-trouves.index') }}" class="section-action blue">
-                    Voir tout →
+                    Voir tout <i class="fa-solid fa-arrow-right"></i>
                 </a>
             </div>
 
@@ -862,24 +965,24 @@
                 @if($derniersTrouves->count() > 0)
                     @foreach($derniersTrouves as $docTrouve)
                         @php
-                            $docStatusColor = '#16a085';
+                            $docStatusColor = '#50A842';
                             $docStatusText = 'En attente';
-                            $docStatusIcon = '⏳';
+                            $docStatusIcon = '';
                             
                             if($docTrouve->statut == 'matche') {
                                 $docStatusColor = '#f39c12';
                                 $docStatusText = 'Matché';
-                                $docStatusIcon = '🔗';
+                                $docStatusIcon = '<i class="fa-solid fa-link"></i>';
                             } elseif($docTrouve->statut == 'restitue') {
-                                $docStatusColor = '#27ae60';
+                                $docStatusColor = '#50A842';
                                 $docStatusText = 'Restitué';
-                                $docStatusIcon = '✅';
+                                $docStatusIcon = '<i class="fa-solid fa-circle-check"></i>';
                             }
                         @endphp
                         
                         <div class="found-doc-item" style="border-left-color: {{ $docStatusColor }};">
                             <div class="found-doc-icon" style="background: linear-gradient(135deg, {{ $docStatusColor }}, {{ $docStatusColor }}dd);">
-                                📄
+                                <i class="fa-solid fa-file-alt"></i>
                             </div>
                             <div class="found-doc-info">
                                 <div class="found-doc-type">
@@ -894,24 +997,24 @@
                                     @endif
                                 </div>
                                 <div class="found-doc-meta">
-                                    <span>📍 {{ $docTrouve->lieu_decouverte }}</span>
-                                    <span>📅 Trouvé le {{ \Carbon\Carbon::parse($docTrouve->date_decouverte)->format('d/m/Y') }}</span>
-                                    <span>👤 {{ $docTrouve->nom_declarant }}</span>
+                                    <span> {{ $docTrouve->lieu_decouverte }}</span>
+                                    <span> Trouvé le {{ \Carbon\Carbon::parse($docTrouve->date_decouverte)->format('d/m/Y') }}</span>
+                                    <span> {{ $docTrouve->nom_declarant }}</span>
                                 </div>
                             </div>
                             <div class="found-doc-actions">
                                 <a href="{{ route('agent.documents-trouves.show', $docTrouve->id) }}" class="btn-found btn-found-primary">
-                                    👁️ Voir & Matcher
+                                     Voir & Matcher
                                 </a>
                                 <span class="match-badge" style="background: {{ $docStatusColor }};">
-                                    {{ $docStatusIcon }} {{ $docStatusText }}
+                                    {!! $docStatusIcon !!} {{ $docStatusText }}
                                 </span>
                             </div>
                         </div>
                     @endforeach
                 @else
                     <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
+                        <div class="empty-state-icon"><i class="fa-solid fa-box-open"></i></div>
                         <p><strong>Aucun document trouvé récemment</strong></p>
                         <p style="font-size: 0.9rem; margin-top: 0.5rem;">
                             Les citoyens peuvent déclarer les documents qu'ils trouvent sur la plateforme
@@ -920,8 +1023,11 @@
                 @endif
             </div>
         </div>
-    </div>
 
+        <footer class="page-footer">
+            <p>© {{ now()->year }} Service Public de l'Administration Togolaise — <a href="{{ route('help.public') }}">Aide</a> • <a href="{{ route('home') }}">Accueil</a></p>
+        </footer>
+    </div>
     <script>
         // Auto-hide alerts
         setTimeout(() => {
