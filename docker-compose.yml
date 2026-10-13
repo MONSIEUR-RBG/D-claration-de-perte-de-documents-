@@ -5,9 +5,15 @@ services:
     build:
       context: ./app
       dockerfile: Dockerfile
+      network: host
     container_name: laravel_app
     restart: unless-stopped
     working_dir: /var/www
+    environment:
+      - DB_HOST=mysql
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./app:/var/www
       - /var/www/vendor
