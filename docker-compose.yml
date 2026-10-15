@@ -8,12 +8,15 @@ services:
       network: host
     container_name: laravel_app
     restart: unless-stopped
+    command: php-fpm -F
     working_dir: /var/www
     environment:
-      - DB_HOST=mysql
-      - DB_DATABASE=${DB_DATABASE}
-      - DB_USERNAME=${DB_USERNAME}
-      - DB_PASSWORD=${DB_PASSWORD}
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_HOST: mysql
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./app:/var/www
       - /var/www/vendor
@@ -73,5 +76,3 @@ volumes:
 networks:
   laravel_net:
     driver: bridge     
-
-
