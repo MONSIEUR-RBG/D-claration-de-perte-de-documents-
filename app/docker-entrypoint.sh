@@ -1,13 +1,11 @@
 #!/bin/sh
 set -e
-DB_HOST="${DB_HOST:-mysql}"
-DB_USERNAME="${DB_USERNAME:-root}"
 
 echo "En attente de MySQL ($DB_HOST)..."
-until mysqladmin ping -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" --silent 2>/dev/null; do
+until mysqladmin ping -h"$DB_HOST" -u"$DB_USERNAME" -p"$DB_PASSWORD" 2>/dev/null; do
     sleep 2
 done
-echo "MySQL est prêt !"
+echo "✅ MySQL est prêt !"
 
 if [ ! -f .env ]; then
     cp .env.example .env
